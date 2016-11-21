@@ -7,8 +7,8 @@ public class LeagueSpaceInvadors {
 	LeagueSpaceInvadors lsi;
 	JFrame frame=new JFrame();
 	GamePanelLSI GamePanel;
-	public final int width=500;
-	public final int height=800;
+	public final static int width=500;
+	public final static int height=800;
 
 	//constructor
 	LeagueSpaceInvadors(){
