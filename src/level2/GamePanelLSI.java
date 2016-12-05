@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanelLSI extends JPanel implements ActionListener, KeyListener{
-	int speed;
+	int speed=5;
 	RocketShip ship=new RocketShip(speed);
-	
+	ObjectManager manager=new ObjectManager();
 	Font title;
 	Font subtitle;
 final int MENU_STATE = 0;
@@ -34,7 +34,8 @@ void drawMenuState(Graphics g){
 void drawGameState(Graphics g){
 	g.setColor(Color.BLACK);
 	g.fillRect(0, 0, LeagueSpaceInvadors.width, LeagueSpaceInvadors.height);
-	ship.draw(g);
+	manager.draw(g);
+	manager.update();
 }
 void drawEndState(Graphics g){
 	g.setColor(Color.RED);
@@ -55,12 +56,12 @@ void updateEndState(){
 	
 }
 Timer timer=new Timer(1000/60,this);
-GameObject gameobject;
+
 GamePanelLSI(){
-	
+	manager.addObject(ship);
 	subtitle=new Font("Arial",Font.ITALIC,25);
 	title = new Font("Arial",Font.BOLD,48);
-	gameobject=new GameObject();
+	
 }
 @Override
 public void actionPerformed(ActionEvent e) {
@@ -74,7 +75,8 @@ public void actionPerformed(ActionEvent e) {
 	}else if(currentState == END_STATE){
 		updateEndState();
 	}
-	gameobject.update();
+	//gameobject.update();
+	manager.update();
 	repaint();
 }
 void startGame(){
@@ -96,9 +98,16 @@ public void keyTyped(KeyEvent e) {
 }
 @Override
 public void keyPressed(KeyEvent e) {
-	if(currentState==1 && e.getKeyCode()==KeyEvent.VK_LEFT){
-		System.out.println("s");
+	System.out.println(e.getKeyCode());
+	if(currentState==1 && e.getKeyCode()==37){
+		ship.x=ship.x-speed;
+	}
+	if(currentState==1 && e.getKeyCode()==39){
 		ship.x=ship.x+speed;
+	}
+	if(currentState==1 && e.getKeyCode()==32){
+		System.out.println("s");
+	manager.addObject(new Projectile(ship.x, ship.y, 10, 5));
 	}
 	// TODO Auto-generated method stub
 	if(currentState<3 && e.getKeyCode() == KeyEvent.VK_ENTER){

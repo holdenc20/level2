@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class RocketShip extends GameObject{
+	
 public RocketShip(int speed){
+	speed=5;
 	x=220;
 	y=700;
 	height=30;
