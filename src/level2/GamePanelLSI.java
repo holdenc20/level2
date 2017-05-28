@@ -36,6 +36,8 @@ void drawGameState(Graphics g){
 	g.fillRect(0, 0, LeagueSpaceInvadors.width, LeagueSpaceInvadors.height);
 	manager.draw(g);
 	manager.update();
+	
+	
 }
 void drawEndState(Graphics g){
 	g.setColor(Color.RED);
@@ -51,6 +53,9 @@ void updateMenuState(){
 }
 void updateGameState(){
 	ship.update();
+	manager.manageEnemies();
+	manager.checkCollision();
+	
 }
 void updateEndState(){
 	
@@ -107,7 +112,7 @@ public void keyPressed(KeyEvent e) {
 	}
 	if(currentState==1 && e.getKeyCode()==32){
 		System.out.println("s");
-	manager.addObject(new Projectile(ship.x, ship.y, 10, 5));
+		manager.addObject(new Projectile(ship.x+ship.width/2, ship.y, 10, 10));
 	}
 	// TODO Auto-generated method stub
 	if(currentState<3 && e.getKeyCode() == KeyEvent.VK_ENTER){
